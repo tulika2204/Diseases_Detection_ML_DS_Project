@@ -24,17 +24,32 @@ class DiseaseModel:
         )
 
     def _get_model(self):
-        """Return the appropriate ML model."""
-        models = {
-            'mnb': MultinomialNB(),
-            'decision_tree': DecisionTreeClassifier(criterion=self.config['model']['decision_tree']['criterion']),
-            'random_forest': RandomForestClassifier(n_estimators=self.config['model']['random_forest']['n_estimators']),
-            'gradient_boost': GradientBoostingClassifier(
-                n_estimators=self.config['model']['gradient_boost']['n_estimators'],
-                criterion=self.config['model']['gradient_boost']['criterion']
-            )
-        }
-        return models.get(self.model_name, DecisionTreeClassifier())
+        """
+        Initializes and returns a machine learning model based on the selected type.
+    
+        Returns:
+            sklearn model: The chosen machine learning classifier.
+        """
+        if self.model_name == 'mnb':
+            return MultinomialNB()
+
+        elif self.model_name == 'decision_tree':
+            criterion = self.config['model']['decision_tree']['criterion']
+            return DecisionTreeClassifier(criterion=criterion)
+
+        elif self.model_name == 'random_forest':
+            n_estimators = self.config['model']['random_forest']['n_estimators']
+            return RandomForestClassifier(n_estimators=n_estimators)
+
+        elif self.model_name == 'gradient_boost':
+            n_estimators = self.config['model']['gradient_boost']['n_estimators']
+            criterion = self.config['model']['gradient_boost']['criterion']
+            return GradientBoostingClassifier(n_estimators=n_estimators, criterion=criterion)
+
+        else:
+            print(f"Warning: {self.model_name} is not recognized. Defaulting to DecisionTreeClassifier.")
+            return DecisionTreeClassifier()
+
 
     def train_model(self):
         """Train the ML model and evaluate it."""
