@@ -17,7 +17,16 @@ class DataLoader:
             return {}
 
     def load_dataset(self, dataset_key):
-        """Load training or test dataset."""
+       """
+       Reads the dataset from a CSV file and extracts features & labels.
+
+       Args:
+        dataset_key (str): Key name (either 'training_data_path' or 'test_data_path').
+
+       Returns:
+        tuple: Features (DataFrame), Labels (Series), Entire DataFrame.
+       """
+
         try:
             dataset_path = self.config['dataset'][dataset_key]
             df = pd.read_csv(dataset_path)
