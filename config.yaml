@@ -1,11 +1,5 @@
 # This file contains the Project Configuration Parameters
 
-# Random State
-random_state: 101
-
-# Verbose for Log Prints
-verbose: True
-
 # Dataset Path
 dataset:
   # Training Dataset Path
@@ -19,16 +13,24 @@ dataset:
 model:
   # Decision Tree
   decision_tree:
+  # Criterion for decision tree splitting
     criterion: 'entropy'
 
   # Random Forest Classifier
   random_forest:
+  # Number of trees in RandomForest
     n_estimators: 100
 
   # Gradient Boosting Classifier
   gradient_boost:
     n_estimators: 150
     criterion: 'friedman_mse'
+
+# Random State
+random_state: 42
+
+# Verbose for Log Prints
+verbose: True
 
 # Model Save Path
 model_save_path: './saved_model/'
